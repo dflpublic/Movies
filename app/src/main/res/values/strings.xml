@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Movies</string>
+    <string name="alt">Poster image match_parentfor the movie</string>
+    <string name="title">Title:</string>
+    <string name="date">Release Date:</string>
+    <string name="desc">Description:</string>
+    <string name="rating">User Rating:</string>
+    <string name="error_message">An error has occurred while loading TMDB.</string>
 </resources>

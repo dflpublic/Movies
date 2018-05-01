@@ -7,29 +7,48 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
-import com.willows5.movies.utilities.NetworkUtils;
+import com.willows5.movies.data.Movie;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class DetailActivity extends AppCompatActivity {
-    TextView  tvDetail;
+    @BindView(R.id.tv_title)
+    TextView  tvTitle;
+    @BindView(R.id.tv_date)
+    TextView  tvDate;
+    @BindView(R.id.tv_rating)
+    TextView  tvRating;
+    @BindView(R.id.tv_desc)
+    TextView  tvDesc;
+    @BindView(R.id.iv_poster)
     ImageView ivPoster;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
-        tvDetail = (TextView) findViewById(R.id.tv_detail);
-        ivPoster = (ImageView) findViewById(R.id.iv_poster);
+        ButterKnife.bind(this);
 
         Intent intent = getIntent();
+
         if (intent.hasExtra(Intent.EXTRA_TEXT)) {
-            String sText   = intent.getStringExtra(Intent.EXTRA_TEXT);
-            int    nLast   = sText.lastIndexOf("\n");
-            String sPoster = sText.substring(nLast + 1);
-            sText = sText.substring(0, nLast);
-            tvDetail.setText(sText);
+            String   sText   = intent.getStringExtra(Intent.EXTRA_TEXT);
+            String[] sa      = sText.split("\n");
+            String   sId     = sa[0];
+            String   sTitle  = sa[1];
+            String   sDate   = sa[2];
+            String   sRating = sa[3];
+            String   sDesc   = sa[4];
+            String   sPoster = sa[5];
+
+            tvTitle.setText(sTitle);
+            tvDate.setText(sDate);
+            tvRating.setText(sRating);
+            tvDesc.setText(sDesc);
 
             Picasso.with(this)
-                    .load(NetworkUtils.IMAGE_PATH + sPoster)
+                    .load(Movie.IMAGE_DETAIL_PATH + sPoster)
                     .placeholder(R.drawable.placeholder)
                     .error(R.drawable.placeholder_error)
                     .into(ivPoster);

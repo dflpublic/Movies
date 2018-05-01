@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="original_image_width">185dp</dimen>
+    <dimen name="original_image_height">278dp</dimen>
+    <dimen name="thumbnail_image_width">92dp</dimen>
+    <dimen name="thumbnail_image_height">138dp</dimen>
+    <dimen name="horizontal_margin">16dp</dimen>
+    <dimen name="vertical_margin">8dp</dimen>
+</resources>

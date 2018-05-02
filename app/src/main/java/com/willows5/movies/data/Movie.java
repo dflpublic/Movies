@@ -13,8 +13,6 @@ import java.net.URL;
 
 public class Movie {
     public static final String TMDB_BASE_URL     = "https://api.themoviedb.org/3/movie/";
-    public static final String POPULAR           = "popular";
-    public static final String TOP_RATED         = "top_rated";
     public static final String API_KEY           = "api_key";
     public static final String MY_KEY            = "6d3afdbb178e40f7936312362dd90a2d";
     public static final String IMAGE_DETAIL_PATH = "https://image.tmdb.org/t/p/w185/";

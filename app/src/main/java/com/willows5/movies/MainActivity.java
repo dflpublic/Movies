@@ -2,12 +2,15 @@ package com.willows5.movies;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -25,7 +28,7 @@ import butterknife.ButterKnife;
 //done: fix layout for DetailActivity
 //done: create layout for RecyclerView content
 //done: use RecyclerView to show data
-//todo: add menu or spinner for sortby type
+//done: add menu or spinner for sortby type
 //todo: add page buttons to navigate
 //done: create horizontal layout for MainActivity
 //done: create horizontal layout for DetailActivity
@@ -38,6 +41,10 @@ public class MainActivity extends AppCompatActivity implements MoviesAdapterOnCl
     @BindView(R.id.pb_loading_indicator)
     ProgressBar progressBar;
     MoviesAdapter _adapter;
+
+    static final String SORT      = "sort";
+    static final String POPULAR   = "popular";
+    static final String TOP_RATED = "top_rated";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,18 +65,47 @@ public class MainActivity extends AppCompatActivity implements MoviesAdapterOnCl
 
     void loadMovies() {
         showMovies();
-        new FetchMoviesTask().execute(Movie.TOP_RATED);
+        SharedPreferences pref  = getPreferences(Context.MODE_PRIVATE);
+        String            sWhat = pref.getString(SORT, POPULAR);
+
+        new FetchMoviesTask().execute(sWhat);
+    }
+
+    private void setSort(String sWhat) {
+        SharedPreferences        pref   = getPreferences(MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putString(SORT, sWhat);
+        editor.commit();
     }
 
     public Movie getMovie(int n) {
         return _adapter.getMovie(n);
     }
 
-//    public void helloClicked(View view) {
-//        Intent intent = new Intent(this, DetailActivity.class);
-//        intent.putExtra(Intent.EXTRA_TEXT, tvHello.getText().toString());
-//        startActivity(intent);
-//    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        switch (id) {
+            case R.id.menu_popular:
+                setSort(POPULAR);
+                break;
+
+            case R.id.menu_top_rated:
+                setSort(TOP_RATED);
+                break;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+        loadMovies();
+        return true;
+    }
 
     int getNumColumns(Context context) {
         DisplayMetrics metrics = context.getResources().getDisplayMetrics();

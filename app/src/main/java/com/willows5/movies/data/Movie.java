@@ -22,7 +22,7 @@ public class Movie {
     int    _nId;
     String _sTitle;
     String _sDate;
-    String _sVote;
+    String _sRating;
     String _sDesc;
     String _sPoster;
 
@@ -30,7 +30,7 @@ public class Movie {
         _nId = nId;
         _sTitle = sTitle;
         _sDate = sDate;
-        _sVote = sVote;
+        _sRating = sVote;
         _sDesc = sDesc;
         _sPoster = sPoster;
     }
@@ -107,7 +107,17 @@ public class Movie {
         return movies;
     }
 
+    public static Movie movieFromString(String s) {
+        String[] sa    = s.split("\n");
+        Movie    movie = new Movie(Integer.valueOf(sa[0]), sa[1], sa[2], sa[3], sa[4], sa[5]);
+        return movie;
+    }
+
     public String getRating() {
-        return _sVote;
+        return _sRating;
+    }
+
+    public String makeString() {
+        return String.format("%d\n%s\n%s\n%s\n%s\n%s", getId(), getTitle(), getDate(), getRating(), getDesc(), getPoster());
     }
 }

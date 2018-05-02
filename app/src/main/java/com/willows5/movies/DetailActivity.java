@@ -33,22 +33,16 @@ public class DetailActivity extends AppCompatActivity {
         Intent intent = getIntent();
 
         if (intent.hasExtra(Intent.EXTRA_TEXT)) {
-            String   sText   = intent.getStringExtra(Intent.EXTRA_TEXT);
-            String[] sa      = sText.split("\n");
-            String   sId     = sa[0];
-            String   sTitle  = sa[1];
-            String   sDate   = sa[2];
-            String   sRating = sa[3];
-            String   sDesc   = sa[4];
-            String   sPoster = sa[5];
+            String sText = intent.getStringExtra(Intent.EXTRA_TEXT);
+            Movie  movie = Movie.movieFromString(sText);
 
-            tvTitle.setText(sTitle);
-            tvDate.setText(sDate);
-            tvRating.setText(sRating);
-            tvDesc.setText(sDesc);
+            tvTitle.setText(movie.getTitle());
+            tvDate.setText(movie.getDate());
+            tvRating.setText(movie.getRating());
+            tvDesc.setText(movie.getDesc());
 
             Picasso.with(this)
-                    .load(Movie.IMAGE_DETAIL_PATH + sPoster)
+                    .load(Movie.IMAGE_DETAIL_PATH + movie.getPoster())
                     .placeholder(R.drawable.placeholder)
                     .error(R.drawable.placeholder_error)
                     .into(ivPoster);

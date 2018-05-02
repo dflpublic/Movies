@@ -87,7 +87,7 @@ public class MainActivity extends AppCompatActivity implements MoviesAdapterOnCl
         SharedPreferences        pref   = getPreferences(MODE_PRIVATE);
         SharedPreferences.Editor editor = pref.edit();
         editor.putString(SORT, sWhat);
-        editor.commit();
+        editor.apply();
     }
 
     public Movie getMovie(int n) {
@@ -139,19 +139,18 @@ public class MainActivity extends AppCompatActivity implements MoviesAdapterOnCl
         DisplayMetrics metrics = context.getResources().getDisplayMetrics();
         //float          dpWidth    = metrics.widthPixels / metrics.density;
         int imageWidth = getResources().getDimensionPixelSize(R.dimen.thumbnail_image_width);
-        int numColumns = metrics.widthPixels / imageWidth;
-        return numColumns;
+        return metrics.widthPixels / imageWidth;
     }
 
     @Override
     public void onClick(int n) {
         Intent intent = new Intent(this, DetailActivity.class);
         Movie  movie  = getMovie(n);
-        String s = String.format("%d\n%s\n%s\n%s\n%s\n%s", movie.getId(), movie.getTitle(), movie
-                .getDate(), movie.getRating(), movie.getDesc(), movie.getPoster());
+        String s      = movie.makeString();
         intent.putExtra(Intent.EXTRA_TEXT, s);
         startActivity(intent);
     }
+
 
     private void showMovies() {
         tvError.setVisibility(View.INVISIBLE);
@@ -177,8 +176,7 @@ public class MainActivity extends AppCompatActivity implements MoviesAdapterOnCl
             try {
                 String s = NetworkUtils.getResponseFromHttpUrl(requestUrl);
                 if (s != null) {
-                    Movie[] movies = Movie.getMovieData(s);
-                    return movies;
+                    return Movie.getMovieData(s);
                 }
             }
             catch (IOException e) {

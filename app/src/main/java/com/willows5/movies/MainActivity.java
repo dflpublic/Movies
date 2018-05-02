@@ -46,6 +46,8 @@ public class MainActivity extends AppCompatActivity implements MoviesAdapterOnCl
     static final String POPULAR   = "popular";
     static final String TOP_RATED = "top_rated";
 
+    String sSort;
+
     /*
     find out the number of columns supported by current screen
     create GridLayoutManager and set it to RecyclerView
@@ -76,9 +78,9 @@ public class MainActivity extends AppCompatActivity implements MoviesAdapterOnCl
          */
         showMovies();
         SharedPreferences pref  = getPreferences(Context.MODE_PRIVATE);
-        String            sWhat = pref.getString(SORT, POPULAR);
+        sSort = pref.getString(SORT, POPULAR);
 
-        new FetchMoviesTask().execute(sWhat);
+        new FetchMoviesTask().execute(sSort);
     }
 
     private void setSort(String sWhat) {
@@ -94,9 +96,15 @@ public class MainActivity extends AppCompatActivity implements MoviesAdapterOnCl
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        /*
+        for some reason if preferences are gotten here, it doesn't seem to remember the saved
+        setting
+         */
         getMenuInflater().inflate(R.menu.main, menu);
-        SharedPreferences pref = getPreferences(MODE_PRIVATE);
-        if (pref.getString(SORT, POPULAR) == TOP_RATED) {
+//        SharedPreferences pref = getPreferences(MODE_PRIVATE);
+//
+//        if (pref.getString(SORT, POPULAR) == TOP_RATED) {
+        if (sSort != POPULAR) {
             menu.getItem(1).setChecked(true);
         } else {
             menu.getItem(0).setChecked(true);

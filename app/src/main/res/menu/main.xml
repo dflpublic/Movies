@@ -7,7 +7,6 @@
         android:id="@+id/menu_popular"
         android:title="popular"
         app:showAsAction="never"
-        android:checked="true"
         />
     <item
         android:id="@+id/menu_top_rated"

@@ -5,5 +5,7 @@
     <string name="date">Release Date:</string>
     <string name="desc">Description:</string>
     <string name="rating">User Rating:</string>
+    <string name="popular">Most Popular</string>
+    <string name="top_rated">Top Rated</string>
     <string name="error_message">An error has occurred while loading TMDB.</string>
 </resources>

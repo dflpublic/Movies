@@ -101,13 +101,11 @@ public class MainActivity extends AppCompatActivity implements MoviesAdapterOnCl
         setting
          */
         getMenuInflater().inflate(R.menu.main, menu);
-//        SharedPreferences pref = getPreferences(MODE_PRIVATE);
-//
-//        if (pref.getString(SORT, POPULAR) == TOP_RATED) {
-        if (sSort != POPULAR) {
-            menu.getItem(1).setChecked(true);
+
+        if (sSort.equals(POPULAR)) {
+            menu.findItem(R.id.menu_popular).setChecked(true);
         } else {
-            menu.getItem(0).setChecked(true);
+            menu.findItem(R.id.menu_top_rated).setChecked(true);
         }
         return true;
     }

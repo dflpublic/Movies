@@ -5,12 +5,12 @@
     <group android:checkableBehavior="single">
     <item
         android:id="@+id/menu_popular"
-        android:title="popular"
+        android:title="@string/popular"
         app:showAsAction="never"
         />
     <item
         android:id="@+id/menu_top_rated"
-        android:title="top_rated"
+        android:title="@string/top_rated"
         app:showAsAction="never"
         />
     </group>

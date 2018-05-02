@@ -79,6 +79,7 @@ public class Movie {
         return getUrl(uri);
     }
 
+    //currently only gets first page (20 movies) returned
     public static Movie[] getMovieData(String s) {
         Movie[] movies = null;
         try {

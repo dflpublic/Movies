@@ -25,6 +25,9 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MoviesAdap
     }
 
     public void setMovies(Movie[] movies) {
+/*
+notifyDataSetChanged MUST BE SET after the data changes, or else the ViewHolder won't be populated
+ */
         _movies = movies;
         notifyDataSetChanged();
     }
@@ -47,7 +50,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MoviesAdap
     @Override
     public void onBindViewHolder(@NonNull MoviesAdapter.MoviesAdapterViewHolder holder, int position) {
         Movie movie = _movies[position];
-//        holder.tvTitle.setText(movie.getTitle());
+
         Picasso.with(context)
                 .load(Movie.IMAGE_MAIN_PATH + movie.getPoster())
                 .placeholder(R.drawable.placeholder)
@@ -64,6 +67,9 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MoviesAdap
         }
     }
 
+    /*
+    need this interface to let MainActivity know which movie was clicked
+     */
     public interface MoviesAdapterOnClickHandler {
         void onClick(int n);
     }
@@ -72,12 +78,9 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MoviesAdap
                                                                          OnClickListener {
         @BindView(R.id.iv_poster_main)
         ImageView ivPoster;
-//        public final TextView  tvTitle;
 
         public MoviesAdapterViewHolder(View itemView) {
             super(itemView);
-//            tvTitle = (TextView)itemView.findViewById(R.id.tv_title_main);
-//            ivPoster = (ImageView)itemView.findViewById(R.id.iv_poster_main);
             ButterKnife.bind(this, itemView);
 
             itemView.setOnClickListener(this);

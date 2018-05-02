@@ -6,6 +6,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Scanner;
 
+//grafted from Sunshine project
 public final class NetworkUtils {
     private static final String TAG = NetworkUtils.class.getSimpleName();
 

@@ -46,6 +46,13 @@ public class MainActivity extends AppCompatActivity implements MoviesAdapterOnCl
     static final String POPULAR   = "popular";
     static final String TOP_RATED = "top_rated";
 
+    /*
+    find out the number of columns supported by current screen
+    create GridLayoutManager and set it to RecyclerView
+    create adapter and set it to RecyclerView
+
+    then load the data into the adapter
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,6 +71,9 @@ public class MainActivity extends AppCompatActivity implements MoviesAdapterOnCl
     }
 
     void loadMovies() {
+        /*
+        grab saved preference to determine which way to sort
+         */
         showMovies();
         SharedPreferences pref  = getPreferences(Context.MODE_PRIVATE);
         String            sWhat = pref.getString(SORT, POPULAR);
@@ -85,6 +95,12 @@ public class MainActivity extends AppCompatActivity implements MoviesAdapterOnCl
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
+        SharedPreferences pref = getPreferences(MODE_PRIVATE);
+        if (pref.getString(SORT, POPULAR) == TOP_RATED) {
+            menu.getItem(1).setChecked(true);
+        } else {
+            menu.getItem(0).setChecked(true);
+        }
         return true;
     }
 
@@ -94,10 +110,12 @@ public class MainActivity extends AppCompatActivity implements MoviesAdapterOnCl
         switch (id) {
             case R.id.menu_popular:
                 setSort(POPULAR);
+                item.setChecked(true);
                 break;
 
             case R.id.menu_top_rated:
                 setSort(TOP_RATED);
+                item.setChecked(true);
                 break;
 
             default:
@@ -108,6 +126,10 @@ public class MainActivity extends AppCompatActivity implements MoviesAdapterOnCl
     }
 
     int getNumColumns(Context context) {
+        /*
+        get the screen width and divide by the image width to determine the number of columns
+        supported
+         */
         DisplayMetrics metrics = context.getResources().getDisplayMetrics();
         //float          dpWidth    = metrics.widthPixels / metrics.density;
         int imageWidth = getResources().getDimensionPixelSize(R.dimen.thumbnail_image_width);

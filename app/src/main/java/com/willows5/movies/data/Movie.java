@@ -4,6 +4,9 @@ import android.net.Uri;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
+import com.google.gson.Gson;
+import com.willows5.movies.BuildConfig;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -14,7 +17,7 @@ import java.net.URL;
 public class Movie {
     public static final String TMDB_BASE_URL     = "https://api.themoviedb.org/3/movie/";
     public static final String API_KEY           = "api_key";
-    public static final String MY_KEY            = "6d3afdbb178e40f7936312362dd90a2d";
+    public static final String MY_KEY            = BuildConfig.MY_TMDB_KEY;
     public static final String IMAGE_DETAIL_PATH = "https://image.tmdb.org/t/p/w185/";
     public static final String IMAGE_MAIN_PATH   = "https://image.tmdb.org/t/p/w92/";
     static final        String TAG               = Movie.class.getSimpleName();
@@ -108,8 +111,8 @@ public class Movie {
     }
 
     public static Movie movieFromString(String s) {
-        String[] sa    = s.split("\n");
-        Movie    movie = new Movie(Integer.valueOf(sa[0]), sa[1], sa[2], sa[3], sa[4], sa[5]);
+        Gson  gson  = new Gson();
+        Movie movie = gson.fromJson(s, Movie.class);
         return movie;
     }
 
@@ -118,6 +121,8 @@ public class Movie {
     }
 
     public String makeString() {
-        return String.format("%d\n%s\n%s\n%s\n%s\n%s", getId(), getTitle(), getDate(), getRating(), getDesc(), getPoster());
+        Gson gson = new Gson();
+        return gson.toJson(this);
     }
+
 }

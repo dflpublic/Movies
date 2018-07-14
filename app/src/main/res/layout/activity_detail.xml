@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,82 +7,113 @@
     android:orientation="vertical"
     tools:context=".DetailActivity">
 
-    <ImageView
-        android:id="@+id/iv_poster"
-        android:layout_width="@dimen/original_image_width"
-        android:layout_height="@dimen/original_image_height"
-        android:layout_gravity="center"
-        android:layout_marginTop="@dimen/horizontal_margin"
-        android:contentDescription="@string/alt"/>
-
-    <ScrollView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/vertical_margin"
-        android:layout_marginTop="@dimen/horizontal_margin">
+        android:orientation="vertical"
+        >
 
-        <LinearLayout
+        <ImageView
+            android:id="@+id/iv_poster"
+            android:layout_width="@dimen/original_image_width"
+            android:layout_height="@dimen/original_image_height"
+            android:layout_gravity="center"
+            android:layout_marginBottom="@dimen/horizontal_margin"
+            android:layout_marginTop="@dimen/horizontal_margin"
+            android:contentDescription="@string/alt"/>
+
+
+        <TextView
+            style="@style/label_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            >
+            android:text="@string/title"
+            />
 
-            <TextView
-                style="@style/label_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/title"
-                />
+        <TextView
+            android:id="@+id/tv_title"
+            style="@style/content_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
 
-            <TextView
-                android:id="@+id/tv_title"
-                style="@style/content_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                />
+        <TextView
+            style="@style/label_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/date"
+            />
 
-            <TextView
-                style="@style/label_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/date"
-                />
+        <TextView
+            android:id="@+id/tv_date"
+            style="@style/content_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
 
-            <TextView
-                android:id="@+id/tv_date"
-                style="@style/content_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                />
+        <TextView
+            style="@style/label_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/rating"
+            />
 
-            <TextView
-                style="@style/label_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/rating"
-                />
+        <TextView
+            android:id="@+id/tv_rating"
+            style="@style/content_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
 
-            <TextView
-                android:id="@+id/tv_rating"
-                style="@style/content_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                />
+        <TextView
+            style="@style/label_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/desc"
+            />
 
-            <TextView
-                style="@style/label_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/desc"
-                />
+        <TextView
+            android:id="@+id/tv_desc"
+            style="@style/content_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
 
-            <TextView
-                android:id="@+id/tv_desc"
-                style="@style/content_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                />
+        <ToggleButton
+            android:id="@+id/add_favorite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textOff="@string/add_to_favorite"
+            android:textOn="@string/remove_from_favorite"/>
+
+        <TextView
+            style="@style/label_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/videos"/>
+
+        <LinearLayout
+            android:id="@+id/ll_videos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
         </LinearLayout>
-    </ScrollView>
-</LinearLayout>
+
+        <TextView
+            style="@style/label_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/reviews"/>
+
+        <LinearLayout
+            android:id="@+id/ll_reviews"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>

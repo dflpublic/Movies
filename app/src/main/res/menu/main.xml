@@ -3,15 +3,17 @@
       xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <group android:checkableBehavior="single">
-    <item
-        android:id="@+id/menu_popular"
-        android:title="@string/popular"
-        app:showAsAction="never"
-        />
-    <item
-        android:id="@+id/menu_top_rated"
-        android:title="@string/top_rated"
-        app:showAsAction="never"
-        />
+        <item
+            android:id="@+id/menu_popular"
+            android:title="@string/popular"
+            app:showAsAction="never"/>
+        <item
+            android:id="@+id/menu_top_rated"
+            android:title="@string/top_rated"
+            app:showAsAction="never"/>
+        <item
+            android:id="@+id/menu_favorite"
+            android:title="@string/favorite"
+            app:showAsAction="never"/>
     </group>
 </menu>

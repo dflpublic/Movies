@@ -51,6 +51,8 @@ public class MainActivity extends AppCompatActivity implements MoviesAdapterOnCl
     static final String SORT      = "sort";
     static final String POPULAR   = "popular";
     static final String TOP_RATED = "top_rated";
+    static final String FAVORITE  = "favorite";
+
     @BindView(R.id.tv_error_message_display)
     TextView    tvError;
     @BindView(R.id.pb_loading_indicator)
@@ -126,11 +128,17 @@ public class MainActivity extends AppCompatActivity implements MoviesAdapterOnCl
          */
         getMenuInflater().inflate(R.menu.main, menu);
 
-        if (sSort.equals(POPULAR)) {
-            menu.findItem(R.id.menu_popular).setChecked(true);
-        } else {
-            menu.findItem(R.id.menu_top_rated).setChecked(true);
+        switch (sSort) {
+            case POPULAR:
+                menu.findItem(R.id.menu_popular).setChecked(true);
+                break;
+            case TOP_RATED:
+                menu.findItem(R.id.menu_top_rated).setChecked(true);
+                break;
+            case FAVORITE:
+                menu.findItem(R.id.menu_favorite).setChecked(true);
         }
+
         return true;
     }
 
@@ -145,6 +153,11 @@ public class MainActivity extends AppCompatActivity implements MoviesAdapterOnCl
 
             case R.id.menu_top_rated:
                 setSort(TOP_RATED);
+                item.setChecked(true);
+                break;
+
+            case R.id.menu_favorite:
+                setSort(FAVORITE);
                 item.setChecked(true);
                 break;
 
@@ -170,8 +183,9 @@ public class MainActivity extends AppCompatActivity implements MoviesAdapterOnCl
     public void onClick(int n) {
         Intent intent = new Intent(this, DetailActivity.class);
         Movie  movie  = getMovie(n);
-        String s      = movie.makeString();
-        intent.putExtra(Intent.EXTRA_TEXT, s);
+        intent.putExtra("myIntent", movie);
+//        String s      = movie.makeString();
+//        intent.putExtra(Intent.EXTRA_TEXT, s);
         startActivity(intent);
     }
 
@@ -212,15 +226,19 @@ public class MainActivity extends AppCompatActivity implements MoviesAdapterOnCl
                 if (sWhat == null || TextUtils.isEmpty(sWhat)) {
                     return null;
                 }
-                URL requestUrl = Movie.buildUrlMovie(sWhat);
-                try {
-                    String s = NetworkUtils.getResponseFromHttpUrl(requestUrl);
-                    if (s != null) {
-                        return Movie.getMovieData(s);
+                if (!sWhat.equals(FAVORITE)) {
+                    URL requestUrl = Movie.buildUrlMovie(sWhat);
+                    try {
+                        String s = NetworkUtils.getResponseFromHttpUrl(requestUrl);
+                        if (s != null) {
+                            return Movie.getMovieData(s);
+                        }
                     }
-                }
-                catch (IOException e) {
-                    e.printStackTrace();
+                    catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    return Movie.getFavorites(getContext());
                 }
                 return null;
             }
@@ -249,4 +267,12 @@ public class MainActivity extends AppCompatActivity implements MoviesAdapterOnCl
     public void onLoaderReset(@NonNull Loader<Movie[]> loader) {
 
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        loadMovies();
+    }
+
 }

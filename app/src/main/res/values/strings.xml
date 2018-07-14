@@ -9,4 +9,9 @@
     <string name="top_rated">Top Rated</string>
     <string name="error_message">An error has occurred while loading TMDB.</string>
     <string name="json_id">id</string>
+    <string name="favorite">Favorite</string>
+    <string name="add_to_favorite">Add To Favorite</string>
+    <string name="remove_from_favorite">Remove from Favorite</string>
+    <string name="videos">Videos:</string>
+    <string name="reviews">Reviews:</string>
 </resources>

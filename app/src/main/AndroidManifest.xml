@@ -26,6 +26,11 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity"/>
         </activity>
+
+        <provider
+            android:name="com.willows5.movies.data.MovieContentProvider"
+            android:authorities="com.willows5.movies"
+            android:exported="false"/>
     </application>
 
 </manifest>

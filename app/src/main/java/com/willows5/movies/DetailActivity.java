@@ -71,22 +71,7 @@ public class DetailActivity extends AppCompatActivity {
                 }
             });
 
-            new AsyncTask<Movie, Void, Void>() {
-
-                @Override
-                protected Void doInBackground(Movie... movie1) {
-                    movie1[0].setMovieReviews(movie1[0].getReviews());
-                    movie1[0].setMovieVideos(movie1[0].getVideos());
-                    return null;
-                }
-
-                @Override
-                protected void onPostExecute(Void aVoid) {
-//                    super.onPostExecute(aVoid);
-                    loadReviewsAndVideos(movie);
-                }
-            }.execute(movie);
-
+            doAsyncLoad(movie);
 
             Picasso.with(this)
                     .load(Movie.IMAGE_DETAIL_PATH + movie.getPoster())
@@ -94,6 +79,23 @@ public class DetailActivity extends AppCompatActivity {
                     .error(R.drawable.placeholder_error)
                     .into(ivPoster);
         }
+    }
+
+    private void doAsyncLoad(Movie movie) {
+        new AsyncTask<Movie, Void, Movie>() {
+
+            @Override
+            protected Movie doInBackground(Movie... movie1) {
+                movie1[0].setMovieReviews(movie1[0].getReviews());
+                movie1[0].setMovieVideos(movie1[0].getVideos());
+                return movie1[0];
+            }
+
+            @Override
+            protected void onPostExecute(Movie data) {
+                loadReviewsAndVideos(data);
+            }
+        }.execute(movie);
     }
 
     private void loadReviewsAndVideos(Movie movie) {
@@ -119,12 +121,10 @@ public class DetailActivity extends AppCompatActivity {
 
                 TextView tvType = view.findViewById(R.id.type);
                 TextView tvName = view.findViewById(R.id.name);
-//                TextView tvKey = (TextView)view.findViewById(R.id.key);
 
                 final Video video = videos[i];
                 tvType.setText(video.getType());
                 tvName.setText(video.getName());
-//                tvKey.setText(videos[i].getKey());
 
                 tvName.setOnClickListener(new OnClickListener() {
                     @Override

@@ -40,6 +40,12 @@ public class Movie implements Parcelable {
     String _sRating;
     String _sDesc;
     String _sPoster;
+
+    Review[] _reviews;
+    Video[]  _videos;
+
+    int idFavorite;
+
     public static final Creator<Movie> CREATOR = new Creator<Movie>() {
         @Override
         public Movie createFromParcel(Parcel source) {
@@ -51,9 +57,6 @@ public class Movie implements Parcelable {
             return new Movie[size];
         }
     };
-    //    int    _nStars = 0;
-    Review[] _reviews;
-    Video[]  _videos;
 
     public Movie(int nId, String sTitle, String sDate, String sVote, String sDesc, String sPoster) {
         _nId = nId;
@@ -76,9 +79,21 @@ public class Movie implements Parcelable {
         return _sDate;
     }
 
-//    public int getStars() {
-//        return _nStars;
-//    }
+    protected Movie(Parcel in) {
+        this._nId = in.readInt();
+        this._sTitle = in.readString();
+        this._sDate = in.readString();
+        this._sRating = in.readString();
+        this._sDesc = in.readString();
+        this._sPoster = in.readString();
+
+//        this._reviews = in.createTypedArray(Review.CREATOR);
+//        this._videos = in.createTypedArray(Video.CREATOR);
+    }
+
+    public String getDesc() {
+        return _sDesc;
+    }
 
     @Nullable
     private static URL getUrl(Uri uri) {
@@ -96,26 +111,8 @@ public class Movie implements Parcelable {
         return url;
     }
 
-    public String getDesc() {
-        return _sDesc;
-    }
-
     public String getPoster() {
         return _sPoster;
-    }
-
-    int idFavorite;
-
-    protected Movie(Parcel in) {
-        this._nId = in.readInt();
-        this._sTitle = in.readString();
-        this._sDate = in.readString();
-        this._sRating = in.readString();
-        this._sDesc = in.readString();
-        this._sPoster = in.readString();
-//        this._nStars = in.readInt();
-//        this._reviews = in.createTypedArray(Review.CREATOR);
-//        this._videos = in.createTypedArray(Video.CREATOR);
     }
 
     //currently only gets first page (20 movies) returned
@@ -177,10 +174,6 @@ public class Movie implements Parcelable {
         return getUrl(uri);
     }
 
-    public Review[] getMovieReviews() {
-        return _reviews;
-    }
-
     public static Movie movieFromString(String s) {
         Gson  gson  = new Gson();
         Movie movie = gson.fromJson(s, Movie.class);
@@ -194,6 +187,10 @@ public class Movie implements Parcelable {
     public String makeString() {
         Gson gson = new Gson();
         return gson.toJson(this);
+    }
+
+    public Review[] getMovieReviews() {
+        return _reviews;
     }
 
     public void setMovieReviews(Review[] reviews) {
@@ -279,7 +276,7 @@ public class Movie implements Parcelable {
         dest.writeString(this._sRating);
         dest.writeString(this._sDesc);
         dest.writeString(this._sPoster);
-//        dest.writeInt(this._nStars);
+
 //        dest.writeTypedArray(this._reviews, flags);
 //        dest.writeTypedArray(this._videos, flags);
     }

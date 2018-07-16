@@ -92,7 +92,7 @@
                 android:textOn="@string/remove_from_favorite"/>
 
             <TextView
-                style="@style/label_text"
+                style="@style/green_label_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/videos"/>
@@ -106,7 +106,7 @@
             </LinearLayout>
 
             <TextView
-                style="@style/label_text"
+                style="@style/blue_label_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/reviews"/>

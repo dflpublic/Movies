@@ -21,4 +21,25 @@
         <item name="android:layout_marginRight">@dimen/horizontal_margin</item>
         <item name="android:layout_marginBottom">@dimen/vertical_margin</item>
     </style>
+
+    <style name="green_label_text"
+           parent="label_text">
+        <item name="android:textColor">@android:color/holo_green_light</item>
+    </style>
+
+    <style name="green_content_text"
+           parent="content_text">
+        <item name="android:textColor">@android:color/holo_green_light</item>
+    </style>
+
+    <style name="blue_label_text"
+           parent="label_text">
+        <item name="android:textColor">@android:color/holo_blue_light</item>
+    </style>
+
+    <style name="blue_content_text"
+           parent="content_text">
+        <item name="android:textColor">@android:color/holo_blue_light</item>
+    </style>
+
 </resources>

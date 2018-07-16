@@ -12,12 +12,4 @@
         android:layout_margin="@dimen/vertical_margin"
         android:contentDescription="@string/alt"/>
 
-    <!--<TextView-->
-    <!--android:id="@+id/tv_title_main"-->
-    <!--android:layout_gravity="center_horizontal"-->
-    <!--android:textAlignment="center"-->
-    <!--android:textSize="16sp"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"/>-->
-
 </LinearLayout>

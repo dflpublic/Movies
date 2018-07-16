@@ -86,9 +86,6 @@ public class Movie implements Parcelable {
         this._sRating = in.readString();
         this._sDesc = in.readString();
         this._sPoster = in.readString();
-
-//        this._reviews = in.createTypedArray(Review.CREATOR);
-//        this._videos = in.createTypedArray(Video.CREATOR);
     }
 
     public String getDesc() {
@@ -134,8 +131,6 @@ public class Movie implements Parcelable {
                 String     sImage       = first.optString("poster_path");
 
                 movies[i] = new Movie(nId, sTitle, sDate, sVote, sDescription, sImage);
-//                movies[i].setMovieReviews(movies[i].getReviews());
-//                movies[i].setMovieVideos(movies[i].getVideos());
             }
 
         }

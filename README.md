@@ -1,3 +1,3 @@
 In order to run this code, you need to supply your own key from TMDB and put it in gradle.properties as
 
-TMDBKey="you key here"
+TMDBKey="your key here"
